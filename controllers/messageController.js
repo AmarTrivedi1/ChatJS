@@ -1,3 +1,5 @@
+//folder: controllers
+//filename: messageController.js
 const Message = require('../models/messageModel');
 
 exports.getMessages = async (req, res) => {
@@ -11,11 +13,11 @@ exports.getMessages = async (req, res) => {
 
 exports.createMessage = async (req, res) => {
   try {
-    const { name, message } = req.body;
+    const { name, message, status } = req.body;
     if (!name || !message) {
       return res.status(400).json({ error: "Name and message are required." });
     }
-    const newMessage = new Message({ name, message });
+    const newMessage = new Message({ name, message, status });
     await newMessage.save();
     res.status(201).json(newMessage);
   } catch (err) {

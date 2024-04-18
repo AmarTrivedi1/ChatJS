@@ -1,3 +1,7 @@
+<!--
+    folder: views
+    filename: index.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +24,14 @@
                 <input type="text" id="messageInput" name="message" class="form-control" placeholder="Type a message..."
                     required maxlength="200">
                 <button class="btn btn-primary" type="submit" id="sendButton">Send</button>
+            </div>
+            <div>
+                <select id="messageStatus" class="form-select">
+                    <option value="regular" selected>Regular</option>
+                    <option value="pending">Pending</option>
+                    <option value="in process">In Process</option>
+                    <option value="completed">Completed</option>
+                </select>
             </div>
         </form>
     </div>

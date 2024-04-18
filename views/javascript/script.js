@@ -1,3 +1,5 @@
+//foler: views/javascript
+//filename: script.js
 $(document).ready(function() {
     const chatWindow = $('#chatWindow');
 
@@ -29,10 +31,11 @@ $(document).ready(function() {
 
     function sendMessage() {
         const message = {
-            name: 'User', // Can replace this with the actual name of the user
-            message: $('#messageInput').val()
+            name: 'User', // Replace with actual user name later
+            message: $('#messageInput').val(),
+            status: $('#messageStatus').val()
         };
-
+    
         $.ajax({
             url: '/messages',
             method: 'POST',
@@ -47,7 +50,7 @@ $(document).ready(function() {
             }
         });
     }
-
+    
     function addMessage(message) {
         const messageElement = $('<div>').text(message);
         chatWindow.append(messageElement);

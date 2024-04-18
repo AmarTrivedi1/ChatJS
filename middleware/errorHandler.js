@@ -1,3 +1,5 @@
+//folder: middleware
+//filename: errorHandler.js
 const errorHandler = (error, req, res, next) => {
     const statusCode = res.statusCode ? res.statusCode : 500;
     switch (statusCode) {
