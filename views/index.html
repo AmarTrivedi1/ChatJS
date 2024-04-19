@@ -14,6 +14,34 @@
 </head>
 
 <body>
+    <div class="container">
+        <div class="d-flex justify-content-end">
+            <button id="loginLogoutButton" class="btn btn-outline-primary" onclick="handleLoginLogout()">Log In</button>
+        </div>
+    </div>
+    
+    <script>
+    function handleLoginLogout() {
+        if (sessionStorage.getItem('accessToken')) {
+            sessionStorage.removeItem('accessToken');
+            location.reload();  // Or redirect to login page
+        } else {
+            window.location.href = 'login.html';
+        }
+    }
+    
+    window.onload = function() {
+        if (sessionStorage.getItem('accessToken')) {
+            document.getElementById('loginLogoutButton').textContent = 'Log Out';
+            const flashMessage = sessionStorage.getItem('flash');
+            if (flashMessage) {
+                alert(flashMessage);
+                sessionStorage.removeItem('flash');
+            }
+        }
+    };
+    </script>
+    
     <div class="container mt-5">
         <h2>Chat Room</h2>
         <div id="chatWindow" class="border bg-light p-3" style="height: 300px; overflow-y: scroll;">
