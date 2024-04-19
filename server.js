@@ -11,7 +11,7 @@ const errorHandler = require('./middleware/errorHandler'); // error handler
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve static files from 'public' directory
+app.use(express.static('views')); // Serve static files from views directory
 
 // Database connection
 connectDb();
