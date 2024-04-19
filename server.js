@@ -1,4 +1,5 @@
 //filename: server.js
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -6,7 +7,6 @@ const messageRoutes = require('./routes/messageRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const connectDb = require('./config/dbConnection'); // Database connection setup
 const errorHandler = require('./middleware/errorHandler'); // error handler
-require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
