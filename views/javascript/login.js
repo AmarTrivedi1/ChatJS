@@ -24,6 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             if (data.accessToken) {
                 // Store access token and redirect
                 sessionStorage.setItem('accessToken', data.accessToken);
+                sessionStorage.setItem('userName', data.userName);
                 window.location.href = 'chatbox.html';
                 sessionStorage.setItem('flash', 'Welcome back!');
             } else {
