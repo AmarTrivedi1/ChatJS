@@ -73,7 +73,7 @@ $(document).ready(function () {
         chatWindow.append(messageBlock);
     }
 
-    function handleLoginLogout() {
+    $('#loginLogoutButton').on('click', function () {
         if (sessionStorage.getItem('accessToken')) {
             sessionStorage.removeItem('accessToken');
             sessionStorage.setItem('flash', 'You have been logged out.');
@@ -81,7 +81,13 @@ $(document).ready(function () {
         } else {
             window.location.href = 'login.html';
         }
+    });
+
+    // Check login state and adjust button text
+    if (sessionStorage.getItem('accessToken')) {
+        $('#loginLogoutButton').text('Log Out');
     }
+
 
     window.onload = function () {
         if (sessionStorage.getItem('accessToken')) {
