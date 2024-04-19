@@ -36,13 +36,13 @@ $(document).ready(function () {
 
     function sendMessage() {
         const message = {
-            name: 'User',
+            name: sessionStorage.getItem('userName'),
             message: $('#messageInput').val(),
             status: $('#messageStatus').val()
         };
 
         $.ajax({
-            url: '/messages',
+            url: 'http://localhost:5001/messages',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(message),
@@ -88,11 +88,23 @@ $(document).ready(function () {
         $('#loginLogoutButton').text('Log Out');
     }
 
-    // Display flash messages if any
-    const flashMessage = sessionStorage.getItem('flash');
-    if (flashMessage) {
-        alert(flashMessage);
-        sessionStorage.removeItem('flash');
-    }
+
+    window.onload = function () {
+        if (sessionStorage.getItem('accessToken')) {
+            document.getElementById('loginLogoutButton').textContent = 'Log Out';
+
+            // Display username
+            const userName = sessionStorage.getItem('userName');
+            if (userName) {
+                document.getElementById('userNameDisplay').textContent = 'Hello, ' + userName + '!';
+            }
+
+        }
+        const flashMessage = sessionStorage.getItem('flash');
+        if (flashMessage) {
+            alert(flashMessage);
+            sessionStorage.removeItem('flash');
+        }
+    };
 
 });

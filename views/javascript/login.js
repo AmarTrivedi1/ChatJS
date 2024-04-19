@@ -31,6 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
                 // Sticky email if login is successful
                 localStorage.setItem('stickyEmail', email);
                 sessionStorage.setItem('accessToken', data.accessToken);
+                sessionStorage.setItem('userName', data.userName);
                 window.location.href = 'chatbox.html';
                 sessionStorage.setItem('flash', 'Welcome back!');
             } else {
