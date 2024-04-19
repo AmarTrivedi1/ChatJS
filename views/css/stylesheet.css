@@ -10,6 +10,18 @@ foler: views/css
     background-color: #f9f9f9;
 }
 
+.message-block[data-status="pending"] {
+    background-color: #fff3cd;  /* A light yellow */
+}
+
+.message-block[data-status="in process"] {
+    background-color: #ffe5cc;  /* A light orange */
+}
+
+.message-block[data-status="completed"] {
+    background-color: #d4edda;  /* A light green */
+}
+
 .message-header {
     font-size: 0.9em;
     color: #666;

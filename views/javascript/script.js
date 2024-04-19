@@ -16,19 +16,23 @@ $(document).ready(function () {
         $.ajax({
             url: 'http://localhost:5001/messages',
             method: 'GET',
-            success: function(messages) {
+            success: function (messages) {
                 chatWindow.empty(); // Clear the chat window
-                messages.reverse().forEach(function(msg) {
+                messages.reverse().forEach(function (msg) {
                     addMessage(msg, msg.status, msg.createdAt);
                 });
-                chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
+                // Only scroll to bottom if user is near the bottom already
+                if (chatWindow.scrollTop() + chatWindow.innerHeight() >= chatWindow[0].scrollHeight - 99) {
+                    chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
+                }
             },
-            error: function() {
+            error: function () {
                 console.error('Error fetching messages');
             }
         });
     }
-    
+
+
 
     function sendMessage() {
         const message = {
@@ -57,6 +61,7 @@ $(document).ready(function () {
         const formattedTime = date.toLocaleString();  // This will format the time based on the user's locale
         const messageBlock = $('<div>')
             .addClass('message-block')
+            .attr('data-status', status)
             .html(`
                 <div class="message-header">
                     <span class="message-name">${message.name}</span>
