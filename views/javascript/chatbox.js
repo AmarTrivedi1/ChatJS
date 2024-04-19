@@ -36,13 +36,13 @@ $(document).ready(function () {
 
     function sendMessage() {
         const message = {
-            name: 'User',
+            name: sessionStorage.getItem('userName'),
             message: $('#messageInput').val(),
             status: $('#messageStatus').val()
         };
 
         $.ajax({
-            url: '/messages',
+            url: 'http://localhost:5001/messages',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(message),
