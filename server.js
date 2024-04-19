@@ -1,4 +1,5 @@
 //filename: server.js
+const cors = require('cors');
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -15,6 +16,7 @@ app.use(express.static('public')); // Serve static files from 'public' directory
 // Database connection
 connectDb();
 
+app.use(cors());
 // Routes
 app.use('/messages', messageRoutes);
 app.use('/api/users', userRoutes);

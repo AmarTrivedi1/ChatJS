@@ -1,0 +1,39 @@
+/*
+foler: views/css
+//filename: stylesheet.css
+*/
+.message-block {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.message-header {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-name {
+    font-weight: bold;
+}
+
+.message-time {
+    color: #999;
+}
+
+.message-body {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.message-footer {
+    font-size: 0.8em;
+    color: #666;
+    text-align: right;
+    margin-top: 10px;
+}
