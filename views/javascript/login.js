@@ -7,8 +7,14 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const errorMessages = document.getElementById('errorMessages');
 
     // Simple frontend validation
-    if (!email || !password) {
-        errorMessages.textContent = 'Both email and password are required.';
+    if (!email) {
+        errorMessages.textContent = 'Email is required.';
+        errorMessages.classList.remove('d-none');
+        return;
+    }
+
+    if (!password) {
+        errorMessages.textContent = 'Password is required.';
         errorMessages.classList.remove('d-none');
         return;
     }
@@ -22,13 +28,15 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         .then(response => response.json())
         .then(data => {
             if (data.accessToken) {
-                // Store access token and redirect
+                // Sticky email if login is successful
+                localStorage.setItem('stickyEmail', email);
                 sessionStorage.setItem('accessToken', data.accessToken);
                 window.location.href = 'chatbox.html';
                 sessionStorage.setItem('flash', 'Welcome back!');
             } else {
                 errorMessages.textContent = data.error || 'Login failed. Please try again.';
                 errorMessages.classList.remove('d-none');
+                document.getElementById('email').value = localStorage.getItem('stickyEmail') || '';
             }
         })
         .catch(error => {
@@ -36,6 +44,11 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             errorMessages.textContent = 'An error occurred. Please try again.';
             errorMessages.classList.remove('d-none');
         });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('email').value = localStorage.getItem('stickyEmail') || '';
+    })
+
     window.onload = function () {
         const flashMessage = sessionStorage.getItem('flash');
         if (flashMessage) {
@@ -45,5 +58,27 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             sessionStorage.removeItem('flash');
         }
     };
+});
+
+document.getElementById('email').addEventListener('blur', function () {
+    const email = this.value;
+    fetch('http://localhost:5001/api/users/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                // Optionally, update the UI to reflect that the email is recognized
+                document.getElementById('errorMessages').textContent = '';
+            } else {
+                document.getElementById('errorMessages').textContent = 'Email does not exist.';
+                document.getElementById('errorMessages').classList.remove('d-none');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 });
 
