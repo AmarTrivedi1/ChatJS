@@ -1,5 +1,5 @@
 //foler: views/javascript
-//filename: script.js
+//filename: chatbox.js
 $(document).ready(function () {
     const chatWindow = $('#chatWindow');
 
@@ -72,4 +72,26 @@ $(document).ready(function () {
             `);
         chatWindow.append(messageBlock);
     }
+
+    function handleLoginLogout() {
+        if (sessionStorage.getItem('accessToken')) {
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.setItem('flash', 'You have been logged out.');
+            window.location.href = 'login.html';
+        } else {
+            window.location.href = 'login.html';
+        }
+    }
+
+    window.onload = function () {
+        if (sessionStorage.getItem('accessToken')) {
+            document.getElementById('loginLogoutButton').textContent = 'Log Out';
+        }
+        const flashMessage = sessionStorage.getItem('flash');
+        if (flashMessage) {
+            alert(flashMessage);
+            sessionStorage.removeItem('flash');
+        }
+    };
+
 });
