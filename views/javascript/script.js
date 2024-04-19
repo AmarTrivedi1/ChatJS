@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     function sendMessage() {
         const message = {
-            name: 'User', // Replace with actual user name later
+            name: 'User', 
             message: $('#messageInput').val(),
             status: $('#messageStatus').val()
         };
