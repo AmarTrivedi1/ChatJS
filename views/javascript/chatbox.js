@@ -77,9 +77,9 @@ $(document).ready(function () {
         if (sessionStorage.getItem('accessToken')) {
             sessionStorage.removeItem('accessToken');
             sessionStorage.setItem('flash', 'You have been logged out.');
-            window.location.href = 'login.html';
+            window.location.href = './login.html';
         } else {
-            window.location.href = 'login.html';
+            window.location.href = './login.html';
         }
     });
 
@@ -88,23 +88,22 @@ $(document).ready(function () {
         $('#loginLogoutButton').text('Log Out');
     }
 
-
-    window.onload = function () {
-        if (sessionStorage.getItem('accessToken')) {
-            document.getElementById('loginLogoutButton').textContent = 'Log Out';
-
-            // Display username
-            const userName = sessionStorage.getItem('userName');
-            if (userName) {
-                document.getElementById('userNameDisplay').textContent = 'Hello, ' + userName + '!';
-            }
-
-        }
-        const flashMessage = sessionStorage.getItem('flash');
-        if (flashMessage) {
-            alert(flashMessage);
-            sessionStorage.removeItem('flash');
-        }
-    };
-
 });
+
+window.onload = function () {
+    if (sessionStorage.getItem('accessToken')) {
+        document.getElementById('loginLogoutButton').textContent = 'Log Out';
+
+        // Display username
+        const userName = sessionStorage.getItem('userName');
+        if (userName) {
+            document.getElementById('userNameDisplay').textContent = 'Hello, ' + userName + '!';
+        }
+
+    }
+    const flashMessage = sessionStorage.getItem('flash');
+    if (flashMessage) {
+        alert(flashMessage);
+        sessionStorage.removeItem('flash');
+    }
+};
