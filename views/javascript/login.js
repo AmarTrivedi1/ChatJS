@@ -68,18 +68,33 @@ document.getElementById('email').addEventListener('blur', function () {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.exists) {
-                // Optionally, update the UI to reflect that the email is recognized
-                document.getElementById('errorMessages').textContent = '';
-            } else {
-                document.getElementById('errorMessages').textContent = 'Email does not exist.';
-                document.getElementById('errorMessages').classList.remove('d-none');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        const errorMessages = document.getElementById('errorMessages');
+        if (data.exists) {
+            errorMessages.textContent = '';  // Clear any error message
+            errorMessages.classList.add('d-none');  // Hide the error message box
+        } else {
+            errorMessages.textContent = 'Email does not exist.';
+            errorMessages.classList.remove('d-none');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
 
+window.onload = function () {
+
+    const flashMessage = sessionStorage.getItem('flash');
+    if (flashMessage) {
+        alert(flashMessage);
+        sessionStorage.removeItem('flash');
+    }
+};
+
+function togglePasswordsVisibility() {
+    const passwordInput = document.getElementById('password');
+    const showPassword = document.getElementById('showPassword').checked;
+    passwordInput.type = showPassword ? 'text' : 'password';
+}
