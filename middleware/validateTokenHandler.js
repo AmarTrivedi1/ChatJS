@@ -2,6 +2,8 @@
 //filename: validateTokenHandler.js
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
+
+// Middleware to validate JWT in the Authorization header; proceeds to the next middleware if valid.
 const validateToken = asyncHandler(async (req, res, next) => {
     let token;
     let authHeader = req.headers.Authorization || req.headers.authorization;

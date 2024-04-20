@@ -61,6 +61,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     };
 });
 
+// Checks email during registration for uniqueness against the server's database.
 document.getElementById('email').addEventListener('blur', function () {
     const email = this.value;
     fetch('http://localhost:5001/api/users/check-email', {
@@ -93,6 +94,7 @@ window.onload = function () {
     }
 };
 
+// Toggles visibility of passwords on login and registration forms.
 function togglePasswordsVisibility() {
     const passwordInput = document.getElementById('password');
     const showPassword = document.getElementById('showPassword').checked;

@@ -1,6 +1,8 @@
 //folder: config
 //filename: dbConnection.js
 const mongoose = require("mongoose");
+
+// Connects to the MongoDB database using Mongoose.
 const connectDb = async () => {
     try {
         const connect = await

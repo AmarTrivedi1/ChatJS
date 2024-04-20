@@ -12,6 +12,7 @@ $(document).ready(function () {
         sendMessage();
     });
 
+    // 	Fetches messages from the server every second and updates the chat window.
     function fetchMessages() {
         $.ajax({
             url: 'http://localhost:5001/messages',
@@ -22,6 +23,7 @@ $(document).ready(function () {
                     addMessage(msg, msg.status, msg.createdAt);
                 });
                 // Only scroll to bottom if user is near the bottom already
+                // So users can read history without disruption
                 if (chatWindow.scrollTop() + chatWindow.innerHeight() >= chatWindow[0].scrollHeight - 99) {
                     chatWindow.scrollTop(chatWindow.prop("scrollHeight"));
                 }
@@ -32,8 +34,7 @@ $(document).ready(function () {
         });
     }
 
-
-
+    // Sends a new message to the server and refreshes the chat window.
     function sendMessage() {
         const message = {
             name: sessionStorage.getItem('userName'),
@@ -56,6 +57,7 @@ $(document).ready(function () {
         });
     }
 
+    // Adds a message to the chat window with formatted date and status.
     function addMessage(message, status, timestamp) {
         const date = new Date(timestamp);
         const formattedTime = date.toLocaleString();  // This will format the time based on the user's locale
@@ -73,6 +75,7 @@ $(document).ready(function () {
         chatWindow.append(messageBlock);
     }
 
+    // Handles the login/logout process by updating session storage and UI state.
     $('#loginLogoutButton').on('click', function () {
         if (sessionStorage.getItem('accessToken')) {
             sessionStorage.removeItem('accessToken');

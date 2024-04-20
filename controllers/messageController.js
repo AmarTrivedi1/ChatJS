@@ -2,6 +2,7 @@
 //filename: messageController.js
 const Message = require('../models/messageModel');
 
+// Fetches the last 50 messages from the database, sorts them by creation date, and sends them back as a JSON response.
 exports.getMessages = async (req, res) => {
   try {
     const messages = await Message.find({}).sort({ createdAt: -1 }).limit(50); // Retrieves the last 50 messages
@@ -11,6 +12,7 @@ exports.getMessages = async (req, res) => {
   }
 };
 
+// 	Creates a new message with required fields 'name' and 'message'; saves it to the database.
 exports.createMessage = async (req, res) => {
   try {
     const { name, message, status } = req.body;

@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 //@desc Register a user
 //@route POST /api/users/register
 //@access public
+// Registers a new user after validating the required fields and checking if the email is already used; hashes the password before saving.
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
@@ -40,6 +41,7 @@ module.exports = registerUser;
 //@desc Login user
 //@route POST /api/users/login
 //@access public
+// Authenticates a user by email and password, generates a JWT if credentials are valid.
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -71,11 +73,13 @@ module.exports = { registerUser, loginUser };
 //@desc Current user information
 //@route GET /api/users/current
 //@access private
+// Returns the current authenticated user's data based on the provided JWT.
 const currentUser = asyncHandler(async (req, res) => {
     res.status(200).json(req.user);
 });
 module.exports = { registerUser, loginUser, currentUser };
 
+// Checks if an email already exists in the database and returns a JSON response indicating the result.
 const checkEmail = asyncHandler(async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email: email }).exec();

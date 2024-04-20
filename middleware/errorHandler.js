@@ -1,5 +1,6 @@
 //folder: middleware
 //filename: errorHandler.js
+// Middleware to handle errors by setting appropriate HTTP status codes and returning error details.
 const errorHandler = (error, req, res, next) => {
     const statusCode = res.statusCode ? res.statusCode : 500;
     switch (statusCode) {

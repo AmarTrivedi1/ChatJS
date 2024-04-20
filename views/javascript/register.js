@@ -42,6 +42,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     });
 });
 
+// Submits a registration form to the server and handles responses.
 function registerUser(username, email, password) {
     fetch('http://localhost:5001/api/users/register', {
         method: 'POST',
@@ -66,6 +67,7 @@ function registerUser(username, email, password) {
     });
 }
 
+// Toggles visibility of passwords on login and registration forms.
 function togglePasswordsVisibility() {
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');

@@ -2,6 +2,7 @@
 // filename: messageModel.js
 const mongoose = require("mongoose");
 
+// 	Schema for messages with fields for name, message, and status (regular, pending, in process, completed). Includes timestamps.
 const messageSchema = new mongoose.Schema({
   name: { type: String, required: true },
   message: { type: String, required: true },
