@@ -43,8 +43,9 @@ module.exports = registerUser;
 const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        res.status(400);
-        throw new Error("All fields are mandatory!");
+        // res.status(400);
+        // throw new Error("All fields are mandatory!");
+        return res.status(400).json({ error: "All fields are mandatory!" });
     }
     const user = await User.findOne({ email });
     //compare password with hashed password
@@ -60,8 +61,9 @@ const loginUser = asyncHandler(async (req, res) => {
         );
         res.status(200).json({ accessToken, userName: user.username });
     } else {
-        res.status(401);
-        throw new Error("Unauthorized access. Email or Password is not valid");
+        // res.status(401);
+        // throw new Error("Unauthorized access. Email or Password is not valid");
+        res.status(401).json({ error: "Unauthorized access. Email or Password is not valid" });
     }
 });
 module.exports = { registerUser, loginUser };
