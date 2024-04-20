@@ -1,5 +1,7 @@
 # ChatJS
 
+Aaron Dimaculangan and Amar Trivedi
+
 A chat app built using Node.JS.
 
 Use the Chrome web browser for the best experience.
